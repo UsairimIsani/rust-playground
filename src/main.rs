@@ -4,6 +4,11 @@
 mod macros;
 
 fn main() {
-    let a = scanline!();
-    println!("Got Input : {}", a);
+    // let a = scanline!();
+    // println!("Got Input : {}", a);
+    let new_map = map! {
+        "a" => "b",
+        "b" => "c"
+    };
+    println!("{:#?}", new_map);
 }
