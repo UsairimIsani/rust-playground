@@ -1,4 +1,5 @@
 pub mod pool;
+pub mod test_io;
 #[cfg(test)]
 mod tests {
     #[test]
@@ -8,7 +9,7 @@ mod tests {
         struct A(usize);
         impl A {
             fn do_thing(&self) {
-                println!("{:#?}", self)
+                println!("{:#?}", self);
             }
             fn inc(&mut self) {
                 self.0 += 1;
@@ -28,12 +29,23 @@ mod tests {
             item.do_thing();
             item.inc();
             assert_eq!(1, item.get());
+            let mut item_2 = pool.get();
+            item_2.do_thing();
+            item_2.inc();
+            let mut item_3 = pool.get();
+            item_3.do_thing();
+            item_3.inc();
         }
         {
             let mut item_2 = pool.get();
             item_2.do_thing();
             item_2.inc();
             assert_eq!(2, item_2.get());
+            item_2.do_thing();
+            item_2.inc();
+            let mut item_3 = pool.get();
+            item_3.do_thing();
+            item_3.inc();
         }
         println!("{:?}", pool);
     }
